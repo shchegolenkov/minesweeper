@@ -1,5 +1,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -8,26 +9,29 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: ''
+    clean: true,
+    assetModuleFilename: 'assets/[name][ext]',
+    publicPath: '',
   },
   devServer: {
-    watchFiles: ["./src/*"],
+    watchFiles: ['./src/*'],
     hot: true,
     static: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000
+    port: 9000,
   },
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, 'src/index.html'),
-      filename: 'index.html'
-    })
+      filename: 'index.html',
+    }),
+    new ESLintPlugin(),
   ],
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.html$/,
@@ -39,7 +43,15 @@ module.exports = {
             },
           },
         ],
-      }
+      },
+      {
+        test: /\.(ico|gif|png|jpg|jpeg|svg|mp3|wav|mpe?g|ogg)$/i,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
     ],
-  },  
+  },
 };
