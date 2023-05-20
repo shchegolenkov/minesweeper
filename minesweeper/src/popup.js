@@ -31,7 +31,7 @@ export default function popupHandler(context) {
             <div class="settings__name">Mines:</div>
             <div class="settings__form settings__flex">
               <span class="settings__description">From 10 to 99</span>
-              <input type="number" class="settings__input input--mines" min="10" max="99">
+              <input type="number" class="settings__input input--mines" min="10" max="99" step="1" minlength="2" maxlength="2" pattern="[0-9]*" required>
             </div>
       </div>
       <div class="settings__block">
@@ -161,7 +161,7 @@ export default function popupHandler(context) {
       document.querySelector('.popup__overlay').classList.remove('popup__overlay--visible');
 
       setTimeout(() => {
-        document.querySelector('.popup__wrapper').remove();
+        if (document.querySelector('.popup__wrapper')) document.querySelector('.popup__wrapper').remove();
       }, 200);
     }
   }
@@ -170,8 +170,32 @@ export default function popupHandler(context) {
     const minesInput = document.querySelector('.input--mines');
     minesInput.value = localStorage.getItem('mines');
 
+    const shakingAnimation = [
+      { transform: 'translateX(0)' },
+      { transform: 'translateX(6px)' },
+      { transform: 'translateX(-6px)' },
+      { transform: 'translateX(4px)' },
+      { transform: 'translateX(-4px)' },
+      { transform: 'translateX(0)' },
+    ];
+
+    const shakingTiming = {
+      duration: 200,
+      iterations: 1,
+    };
+
+    minesInput.oninput = function limitInputLength() {
+      minesInput.value = minesInput.value.substr(0, 2);
+    };
+
     minesInput.addEventListener('change', () => {
-      localStorage.setItem('mines', minesInput.value);
+      if (minesInput.value.length === 2 && /^([1-9]\d)$/.test(minesInput.value)) {
+        minesInput.classList.remove('settings__input--invalid');
+        localStorage.setItem('mines', minesInput.value);
+      } else {
+        minesInput.classList.add('settings__input--invalid');
+        minesInput.animate(shakingAnimation, shakingTiming);
+      }
     });
 
     const settingRadioButtons = popup.querySelectorAll('.input');
@@ -180,6 +204,9 @@ export default function popupHandler(context) {
       if (input.value === localStorage.getItem(input.name)) {
         input.setAttribute('checked', 'true');
       }
+      input.addEventListener('click', () => {
+        localStorage.setItem(input.name, input.value);
+      });
     });
   }
 
