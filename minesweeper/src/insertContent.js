@@ -2,6 +2,8 @@ import logoImg from './assets/img/logo-image.png';
 import logoText from './assets/img/logo-text.svg';
 import timeIcon from './assets/img/time-icon.svg';
 import clickIcon from './assets/img/click-icon.svg';
+import bombIcon from './assets/img/bomb-icon.svg';
+import flagIcon from './assets/img/flag-icon.svg';
 import emojiSmile from './assets/img/emoji-smile.svg';
 import resultsIcon from './assets/img/results-icon.svg';
 import settingsIcon from './assets/img/settings-icon.svg';
@@ -18,13 +20,21 @@ export default function insertContent() {
           <img src=${timeIcon} alt="Time" height="30">
           <span class="info-block__text time__counter">000</span>
         </div>
-        <button class="button button--game">
-          <img src=${emojiSmile} alt="emoji" height="40">
-          <span class="button__text">Play again</span>
-        </button>
         <div class="info-block info-block--clicks">
           <img src=${clickIcon} alt="Clicks" height="30">
           <span class="info-block__text click__counter">000</span>
+        </div>
+        <button class="button button--game">
+          <img class="emoji" src=${emojiSmile} alt="emoji" height="40">
+          <span class="button__text">Play again</span>
+        </button>
+        <div class="info-block info-block--bombs">
+          <img src=${bombIcon} alt="Mines" height="30">
+          <span class="info-block__text bombs__counter">000</span>
+        </div>
+        <div class="info-block info-block--flags">
+          <img src=${flagIcon} alt="Flags" height="30">
+          <span class="info-block__text flags__counter">000</span>
         </div>
       </div>
       <div class="grid">

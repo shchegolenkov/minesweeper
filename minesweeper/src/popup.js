@@ -1,7 +1,12 @@
 import closeIcon from './assets/img/close-icon.svg';
 
+import setTheme from './setTheme';
+import renderGame from './renderGame';
+
 export default function popupHandler(context) {
   function openPopup() {
+    const results = JSON.parse(localStorage.getItem('results'));
+
     const settingsPopupContent = `<div class="popup__wrapper">
     <div class="popup__overlay"></div>
     <div class="popup settings__popup">
@@ -13,16 +18,16 @@ export default function popupHandler(context) {
         <div class="settings__name">Level:</div>
         <form class="settings__form settings__flex">
           <label class="settings__label">
-            <input type="radio" name="level" value="easy" class="input input--level">
+            <input type="radio" name="level" value="10" class="input input--level">
             Easy
           </label>
           <br>
           <label class="settings__label">
-            <input type="radio" name="level" value="medium" class="input input--level">
+            <input type="radio" name="level" value="15" class="input input--level">
             Medium
           </label>
           <label class="settings__label">
-            <input type="radio" name="level" value="hard" class="input input--level">
+            <input type="radio" name="level" value="25" class="input input--level">
                 Hard
               </label>
             </form>
@@ -83,53 +88,53 @@ export default function popupHandler(context) {
         <tbody>
           <tr>
             <td>1</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[0].time || 0}</td>
+            <td>${results[0].moves || 0}</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[1].time || 0}</td>
+            <td>${results[1].moves || 0}</td>
           </tr>
           <tr>
             <td>3</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[2].time || 0}</td>
+            <td>${results[2].moves || 0}</td>
           </tr>
           <tr>
             <td>4</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[3].time || 0}</td>
+            <td>${results[3].moves || 0}</td>
           </tr>
           <tr>
             <td>5</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[4].time || 0}</td>
+            <td>${results[4].moves || 0}</td>
           </tr>
           <tr>
             <td>6</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[5].time || 0}</td>
+            <td>${results[5].moves || 0}</td>
           </tr>
           <tr>
             <td>7</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[6].time || 0}</td>
+            <td>${results[6].moves || 0}</td>
           </tr>
           <tr>
             <td>8</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[7].time || 0}</td>
+            <td>${results[7].moves || 0}</td>
           </tr>
           <tr>
             <td>9</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[8].time || 0}</td>
+            <td>${results[8].moves || 0}</td>
           </tr>
           <tr>
             <td>10</td>
-            <td>0</td>
-            <td>0</td>
+            <td>${results[9].time || 0}</td>
+            <td>${results[9].moves || 0}</td>
           </tr>
         </tbody>
       </table>
@@ -206,6 +211,8 @@ export default function popupHandler(context) {
       }
       input.addEventListener('click', () => {
         localStorage.setItem(input.name, input.value);
+        if (input.name === 'theme') setTheme();
+        if (input.name === 'level') renderGame();
       });
     });
   }
