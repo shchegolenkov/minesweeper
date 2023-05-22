@@ -16,25 +16,29 @@ export default function insertContent() {
     </div>
     <div class="game-area">
       <div class="game-area__top">
-        <div class="info-block info-block--time">
-          <img src=${timeIcon} alt="Time" height="30">
-          <span class="info-block__text time__counter">000</span>
-        </div>
-        <div class="info-block info-block--clicks">
-          <img src=${clickIcon} alt="Clicks" height="30">
-          <span class="info-block__text click__counter">000</span>
+        <div class="game-area__top-left">
+          <div class="info-block info-block--time">
+            <img src=${timeIcon} alt="Time" height="30">
+            <span class="info-block__text time__counter">000</span>
+          </div>
+          <div class="info-block info-block--clicks">
+            <img src=${clickIcon} alt="Clicks" height="30">
+            <span class="info-block__text click__counter">000</span>
+          </div>
         </div>
         <button class="button button--game">
           <img class="emoji" src=${emojiSmile} alt="emoji" height="40">
           <span class="button__text">Play again</span>
         </button>
-        <div class="info-block info-block--bombs">
-          <img src=${bombIcon} alt="Mines" height="30">
-          <span class="info-block__text bombs__counter">000</span>
-        </div>
-        <div class="info-block info-block--flags">
-          <img src=${flagIcon} alt="Flags" height="30">
-          <span class="info-block__text flags__counter">000</span>
+        <div class="game-area__top-right">
+          <div class="info-block info-block--bombs">
+            <img src=${bombIcon} alt="Mines" height="30">
+            <span class="info-block__text bombs__counter">000</span>
+          </div>
+          <div class="info-block info-block--flags">
+            <img src=${flagIcon} alt="Flags" height="30">
+            <span class="info-block__text flags__counter">000</span>
+          </div>
         </div>
       </div>
       <div class="grid">
